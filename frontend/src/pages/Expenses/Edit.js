@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import LoadingIndicator from "./LoadingIndicator";
-import ErrorMessage from "./ErrorMessage";
-import request from "../request";
-import styles from "./ExpenseEdit.module.css";
-import Button from "./Button";
-import { useNotifications } from "./Notifications";
+import LoadingIndicator from "../../components/LoadingIndicator";
+import ErrorMessage from "../../components/ErrorMessage";
+import Button from "../../components/Button";
+import { useNotifications } from "../../components/Notifications";
+import request from "../../request";
+
+import styles from "./Edit.module.css";
 
 function ExpenseForm({ expense, onSave, disabled, onDelete }) {
   const [changes, setChanges] = useState({});

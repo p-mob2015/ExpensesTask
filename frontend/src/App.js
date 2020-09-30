@@ -7,8 +7,8 @@ import {
   Link,
 } from "react-router-dom";
 import styles from "./App.module.css";
-import ExpensesPage from "./components/ExpensesPage";
-import ExpenseEdit from "./components/ExpenseEdit";
+import ExpensesPage from "./pages/Expenses/List";
+import ExpenseEdit from "./pages/Expenses/Edit";
 import Notifications from "./components/Notifications";
 
 function App() {
