@@ -30,7 +30,9 @@
 
 input[type="text"],
 input[type="number"],
-input[type="date"] {
+input[type="date"],
+select {
+  box-sizing: content-box;
   padding: 8px;
   height: 30px;
   width: 250px;
