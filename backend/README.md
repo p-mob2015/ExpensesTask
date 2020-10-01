@@ -11,11 +11,11 @@ Things you may want to cover:
 
 * Configuration
 
-* Database creation
-
 * Database initialization
+`rake db:setup`
 
 * How to run the test suite
+`bundle exec rspec`
 
 * Services (job queues, cache servers, search engines, etc.)
 
