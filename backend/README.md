@@ -5,20 +5,21 @@ application up and running.
 
 Things you may want to cover:
 
-* Ruby version
+## Ruby version
+`2.6.6`
 
-* System dependencies
+## Depedencies
+`bundle install`
 
-* Configuration
+## Database configuration  
+The app uses `Sqlite3` as default which doesn't require any external setup steps.  
+Please configure `config/database.yml` and install corresponding dependencies if changes are needed.
 
-* Database initialization
+## Database initialization
 `rake db:setup`
 
-* How to run the test suite
+## How to run the test suite
 `bundle exec rspec`
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+## How to run the app
+`rails s`
