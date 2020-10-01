@@ -158,6 +158,10 @@ function AccountEdit() {
   }
 
   async function handleDelete() {
+    if (!window.confirm('Are you sure to want to delete this account? It will also delete all the associated expenses.')) {
+      return;
+    }
+
     setDeleting(true);
     try {
       const response = await request(`/accounts/${account.id}`, {

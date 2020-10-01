@@ -160,7 +160,6 @@ function ExpenseEdit() {
   );
 
   async function handleSave(changes) {
-    console.log('Changes', changes)
     try {
       setSaving(true);
       const url = expense.id ? `/expenses/${expense.id}` : "/expenses";
@@ -185,6 +184,10 @@ function ExpenseEdit() {
   }
 
   async function handleDelete() {
+    if (!window.confirm('Are you sure to want to delete this expense record?')) {
+      return;
+    }
+
     setDeleting(true);
     try {
       const response = await request(`/expenses/${expense.id}`, {
