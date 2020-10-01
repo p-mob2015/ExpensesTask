@@ -4,6 +4,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import ErrorMessage from "../../components/ErrorMessage";
 import Button from "../../components/Button";
 import { useNotifications } from "../../components/Notifications";
+import { parseRecordError } from "../../utils/error";
 import request from "../../request";
 
 import styles from "./Edit.module.css";
@@ -172,7 +173,7 @@ function ExpenseEdit() {
       if (response.ok) {
         setExpense(response.body);
       } else {
-        notifyError("Failed to save expense. Please try again");
+        notifyError(`Failed to save expense. ${parseRecordError(response.body)}`);
       }
     } catch (error) {
       notifyError(

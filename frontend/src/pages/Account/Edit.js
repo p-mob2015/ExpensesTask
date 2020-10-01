@@ -5,6 +5,7 @@ import LoadingIndicator from "../../components/LoadingIndicator";
 import ErrorMessage from "../../components/ErrorMessage";
 import Button from "../../components/Button";
 import { useNotifications } from "../../components/Notifications";
+import { parseRecordError } from "../../utils/error";
 import request from "../../request";
 
 import styles from "./Edit.module.css";
@@ -146,7 +147,7 @@ function AccountEdit() {
       if (response.ok) {
         setAccount(response.body);
       } else {
-        notifyError("Failed to save account. Please try again");
+        notifyError(`Failed to save account. ${parseRecordError(response.body)}`);
       }
     } catch (error) {
       notifyError(

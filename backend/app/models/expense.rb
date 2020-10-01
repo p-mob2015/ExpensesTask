@@ -23,7 +23,7 @@ class Expense < ApplicationRecord
       account.deduct_balance!(amount-previous_amount)
     end
   rescue ActiveRecord::RecordInvalid
-    errors.add(:amount, "The account balance is insufficient: #{account.balance_in_database}")
+    errors.add(:account, "balance is insufficient: $#{account.balance_in_database}")
     raise ActiveRecord::RecordInvalid.new(self)
   end
 
