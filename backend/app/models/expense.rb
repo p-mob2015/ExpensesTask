@@ -1,5 +1,6 @@
 class Expense < ApplicationRecord
   before_save :update_account_balance!
+  after_destroy :restore_account_balance
 
   belongs_to :account
 
@@ -24,5 +25,11 @@ class Expense < ApplicationRecord
   rescue ActiveRecord::RecordInvalid
     errors.add(:amount, "The account balance is insufficient: #{account.balance_in_database}")
     raise ActiveRecord::RecordInvalid.new(self)
+  end
+
+  def restore_account_balance
+    unless destroyed_by_association
+      account.add_balance(amount)
+    end
   end
 end
