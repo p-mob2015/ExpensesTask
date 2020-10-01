@@ -4,13 +4,14 @@ class ExpensesController < ApplicationController
     render json: expense.errors, status: :bad_request
   end
 
+  before_action :set_expense, only: [:show, :update, :destroy]
+
   def index
     render json: Expense.order(date: :desc)
   end
 
   def show
-    expense = Expense.find(params[:id])
-    render json: expense
+    render json: @expense
   end
 
   def create
@@ -19,17 +20,19 @@ class ExpensesController < ApplicationController
   end
 
   def update
-    expense = Expense.find(params[:id])
-    expense.update!(expense_params)
-    render json: expense
+    @expense.update!(expense_params)
+    render json: @expense
   end
 
   def destroy
-    expense = Expense.find(params[:id])
-    expense.destroy
+    @expense.destroy
   end
 
   private
+
+  def set_expense
+    @expense = Expense.find(params[:id])
+  end
 
   def expense_params
     params.permit(:amount, :date, :description, :account_id)

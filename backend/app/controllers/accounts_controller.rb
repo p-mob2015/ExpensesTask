@@ -4,13 +4,14 @@ class AccountsController < ApplicationController
     render json: account.errors, status: :bad_request
   end
 
+  before_action :set_account, only: [:show, :update, :destroy]
+
   def index
     render json: Account.order(date: :desc)
   end
 
   def show
-    account = Account.find(params[:id])
-    render json: account.to_json(include: :expenses)
+    render json: @account.to_json(include: :expenses)
   end
 
   def create
@@ -19,17 +20,19 @@ class AccountsController < ApplicationController
   end
 
   def update
-    account = Account.find(params[:id])
-    account.update!(account_params)
-    render json: account
+    @account.update!(account_params)
+    render json: @account.to_json(include: :expenses)
   end
 
   def destroy
-    account = Account.find(params[:id])
-    account.destroy
+    @account.destroy
   end
 
   private
+
+  def set_account
+    @account = Account.find(params[:id])
+  end
 
   def account_params
     params.permit(:name, :number)
