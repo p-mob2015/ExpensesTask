@@ -209,9 +209,9 @@ function ExpenseEdit() {
   }
 
   let content;
-  if (loadingStatus === "loading") {
+  if (loadingStatus === "loading" || accountsLoadingStatus === "loading") {
     content = <LoadingIndicator />;
-  } else if (loadingStatus === "loaded") {
+  } else if (loadingStatus === "loaded" && accountsLoadingStatus === "loaded") {
     content = (
       <ExpenseForm
         key={expense.updated_at}
@@ -222,10 +222,10 @@ function ExpenseEdit() {
         onDelete={handleDelete}
       />
     );
-  } else if (loadingStatus === "error") {
+  } else if (loadingStatus === "error" || accountsLoadingStatus === "error") {
     content = <ErrorMessage />;
   } else {
-    throw new Error(`Unexpected loadingStatus: ${loadingStatus}`);
+    throw new Error(`Unexpected [loadingStatus, accountsLoadingStatus]: [${loadingStatus}, ${accountsLoadingStatus}]`);
   }
 
   return <div>{content}</div>;
