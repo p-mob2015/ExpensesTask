@@ -37,3 +37,12 @@ input[type="date"] {
   border: 1px solid #bebebe;
   border-radius: 4px;
 }
+
+.expenseList {
+  list-style-type: none;
+  padding: 0;
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  background: #ffffff;
+}

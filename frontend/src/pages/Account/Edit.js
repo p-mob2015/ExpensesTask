@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
+import ExpenseRow from "../../components/Expense/Row";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import ErrorMessage from "../../components/ErrorMessage";
 import Button from "../../components/Button";
@@ -31,6 +32,13 @@ function AccountForm({ account, onSave, disabled, onDelete }) {
   return (
     <form autoComplete={"off"} onSubmit={handleSubmit} className={styles.form}>
       <fieldset disabled={disabled ? "disabled" : undefined}>
+        {account.id && (
+          <div className={styles.formRow}>
+            <label htmlFor="balance">Balance</label>
+            <span id="balance">${account.balance}</span>
+          </div>
+        )}
+
         <div className={styles.formRow}>
           <label htmlFor="name">Name</label>
           <input
@@ -75,6 +83,21 @@ const defaultAccountData = {
   name: "",
   number: "",
 };
+
+function AccountExpenseList({ expenses }) {
+  if (!expenses || !expenses.length) return null;
+
+  return (
+    <>
+      <h3>Expenses</h3>
+      <ul className={styles.expenseList}>
+        {expenses.map((expense) => (
+          <ExpenseRow key={expense.id} expense={expense} />
+        ))}
+      </ul>
+    </>
+  );
+}
 
 function AccountEdit() {
   const { id } = useParams();
@@ -159,13 +182,16 @@ function AccountEdit() {
     content = <LoadingIndicator />;
   } else if (loadingStatus === "loaded") {
     content = (
-      <AccountForm
-        key={account.updated_at}
-        account={account}
-        onSave={handleSave}
-        disabled={isSaving || isDeleting}
-        onDelete={handleDelete}
-      />
+      <>
+        <AccountForm
+          key={account.updated_at}
+          account={account}
+          onSave={handleSave}
+          disabled={isSaving || isDeleting}
+          onDelete={handleDelete}
+        />
+        <AccountExpenseList expenses={account.expenses} />
+      </>
     );
   } else if (loadingStatus === "error") {
     content = <ErrorMessage />;

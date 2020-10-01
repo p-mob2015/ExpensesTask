@@ -10,7 +10,7 @@ class AccountsController < ApplicationController
 
   def show
     account = Account.find(params[:id])
-    render json: account
+    render json: account.to_json(include: :expenses)
   end
 
   def create

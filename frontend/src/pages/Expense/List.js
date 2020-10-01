@@ -1,22 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import ExpenseRow from "../../components/Expense/Row";
 import LoadingIndicator from "../../components/LoadingIndicator";
 import ErrorMessage from "../../components/ErrorMessage";
 import Button from "../../components/Button";
 import request from "../../request";
 
 import styles from "./List.module.css";
-
-function ExpenseRow({ expense }) {
-  return (
-    <li className={styles.item}>
-      <Link to={`/expense/${expense.id}`} className={styles.itemInner}>
-        <div className={styles.descriptionText}>{expense.description}</div>
-        <div className={styles.amountText}>${expense.amount.toFixed(2)}</div>
-      </Link>
-    </li>
-  );
-}
 
 function ExpenseList({ expenses }) {
   const newExpenseButton = <Button to={"/expense/new"}>New Expense</Button>;
